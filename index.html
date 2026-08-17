@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>سوق المحلة | متجر احترافي</title>
+    <title>سوق المحلة | متجر بقالة احترافي</title>
     <style>
       :root {
         --primary: #f59e0b;
@@ -713,7 +713,7 @@
           <span class="subtitle">⚡ توصيل سريع وطلب سهل</span>
           <h1>السوق اللي تشتري منه كل يوم</h1>
           <p>
-            اكتشف أفضل منتجات الشيبسي، المشروبات، ومنتجات العناية المنزلية بمواصفات ممتازة
+            اكتشف أفضل منتجات الشيبسي، بيبسي والمشروبات، والسلع التموينية والبقالة بمواصفات ممتازة
             وأسعار مناسبة مع تجربة طلب سريعة ومريحة جدًا.
           </p>
 
@@ -745,22 +745,22 @@
           </div>
 
           <div>
-            <h3>خصم 30%</h3>
-            <p>على طلبات الشيبسي + منتجات العناية المنزلية وخصوصًا في العروض اليومية.</p>
+            <h3>عروض البقالة والشيبسي</h3>
+            <p>أطلب شيبسي، بيبسي، ومنتجات البقالة والمنظفات بأعلى جودة وأفضل سعر.</p>
           </div>
 
           <div class="product-highlight">
             <div class="highlight-item">
-              <span>شيبسي جبنة</span>
-              <strong>12 ر.س</strong>
+              <span>شيبسي بالجبنة المتبلة</span>
+              <strong>15 ج.م</strong>
             </div>
             <div class="highlight-item">
-              <span>مسحوق غسيل</span>
-              <strong>28 ر.س</strong>
+              <span>بيبسي كولا 1.5 لتر</span>
+              <strong>30 ج.م</strong>
             </div>
             <div class="highlight-item">
-              <span>ماء معدني</span>
-              <strong>6 ر.س</strong>
+              <span>أرز مصري فاخر 1 كجم</span>
+              <strong>35 ج.م</strong>
             </div>
           </div>
         </div>
@@ -774,10 +774,10 @@
         </div>
         <div class="chip-row" id="categoryChips">
           <button class="chip active" data-category="الكل">الكل</button>
-          <button class="chip" data-category="الشيبسي">الشيبسي</button>
+          <button class="chip" data-category="الشيبسي والمقرمشات">الشيبسي والمقرمشات</button>
+          <button class="chip" data-category="المشروبات والمياه">المشروبات والمياه</button>
+          <button class="chip" data-category="البقالة والسلع التموينية">البقالة والسلع التموينية</button>
           <button class="chip" data-category="العناية المنزلية">العناية المنزلية</button>
-          <button class="chip" data-category="المشروبات">المشروبات</button>
-          <button class="chip" data-category="مستلزمات المطبخ">مستلزمات المطبخ</button>
         </div>
       </section>
 
@@ -837,15 +837,15 @@
         <div class="cart-summary">
           <div class="summary-row">
             <span>المجموع الفرعي</span>
-            <strong id="subtotalValue">0.00 ر.س</strong>
+            <strong id="subtotalValue">0.00 ج.م</strong>
           </div>
           <div class="summary-row">
             <span>التوصيل</span>
-            <strong>0.00 ر.س</strong>
+            <strong>0.00 ج.م</strong>
           </div>
           <div class="summary-row total">
             <span>الإجمالي</span>
-            <strong id="totalValue">0.00 ر.س</strong>
+            <strong id="totalValue">0.00 ج.م</strong>
           </div>
         </div>
 
@@ -857,7 +857,7 @@
 
           <div class="field">
             <label for="customerPhone">رقم الهاتف</label>
-            <input id="customerPhone" name="customerPhone" type="tel" placeholder="05XXXXXXXX" required />
+            <input id="customerPhone" name="customerPhone" type="tel" placeholder="01XXXXXXXXX" required />
           </div>
 
           <div class="field">
@@ -879,18 +879,34 @@
 
     <script>
       const products = [
-        { id: 1, name: 'شيبسي جبنة', category: 'الشيبسي', price: 12, emoji: '🥨', barcode: '622100000001', reference: 'REF-CHIP-001', description: 'شيبسي مقرمش بنكهات الجبن المميزة.' },
-        { id: 2, name: 'شيبسي بالملح', category: 'الشيبسي', price: 10, emoji: '🍟', barcode: '622100000002', reference: 'REF-CHIP-002', description: 'نكهة تقليدية ممتازة مناسبة للعائلة.' },
-        { id: 3, name: 'شيبسي ليمون', category: 'الشيبسي', price: 13, emoji: '🥔', barcode: '622100000003', reference: 'REF-CHIP-003', description: 'نكهة ليمون منعشة ومقرمشة.' },
-        { id: 4, name: 'مسحوق غسيل', category: 'العناية المنزلية', price: 28, emoji: '🧼', barcode: '622100000004', reference: 'REF-HOME-001', description: 'منظف قوي لإزالة البقع والروائح.' },
-        { id: 5, name: 'مناديل مبللة', category: 'العناية المنزلية', price: 15, emoji: '🧻', barcode: '622100000005', reference: 'REF-HOME-002', description: 'مناديل مبللة مناسبة للتنظيف السريع.' },
-        { id: 6, name: 'منظف متعدد الاستخدامات', category: 'العناية المنزلية', price: 22, emoji: '🧽', barcode: '622100000006', reference: 'REF-HOME-003', description: 'يستخدم في تنظيف المطبخ والحمام.' },
-        { id: 7, name: 'ماء معدني', category: 'المشروبات', price: 6, emoji: '💧', barcode: '622100000007', reference: 'REF-DRINK-001', description: 'ماء منعش وخفيف في عبوة عملية.' },
-        { id: 8, name: 'عصير برتقال', category: 'المشروبات', price: 9, emoji: '🍊', barcode: '622100000008', reference: 'REF-DRINK-002', description: 'عصير برتقال طبيعي بنكهة منعشة.' },
-        { id: 9, name: 'غازية بنكهة الليمون', category: 'المشروبات', price: 11, emoji: '🥤', barcode: '622100000009', reference: 'REF-DRINK-003', description: 'مشروب غازي منعش مناسب للوجبات اليومية.' },
-        { id: 10, name: 'بسكويت شاي', category: 'مستلزمات المطبخ', price: 11, emoji: '🍪', barcode: '622100000010', reference: 'REF-KITCHEN-001', description: 'بسكويت مناسب مع الشاي والقهوة.' },
-        { id: 11, name: 'أكياس نايلون', category: 'مستلزمات المطبخ', price: 8, emoji: '🛍️', barcode: '622100000011', reference: 'REF-KITCHEN-002', description: 'أكياس مريحة للتغليف اليومي في المنزل.' },
-        { id: 12, name: 'مناديل ورقية', category: 'مستلزمات المطبخ', price: 7, emoji: '🧻', barcode: '622100000012', reference: 'REF-KITCHEN-003', description: 'مناديل ورقية عملية ومفيدة للمنزل.' }
+        // قسم الشيبسي والمقرمشات
+        { id: 1, name: 'شيبسي بالجبنة المتبلة', category: 'الشيبسي والمقرمشات', price: 15, emoji: '🥨', barcode: '622100000001', reference: 'REF-CHIP-001', description: 'بطاطس شيبسي مقرمشة بنكهة الجبنة المتبلة اللذيذة.' },
+        { id: 2, name: 'شيبسي بالطماطم', category: 'الشيبسي والمقرمشات', price: 15, emoji: '🍟', barcode: '622100000002', reference: 'REF-CHIP-002', description: 'بطاطس مقرمشة بنكهة الطماطم المبتكرة.' },
+        { id: 3, name: 'شيبسي بالفلفل والليمون', category: 'الشيبسي والمقرمشات', price: 15, emoji: '🥔', barcode: '622100000003', reference: 'REF-CHIP-003', description: 'نكهة الفلفل والليمون المنعشة والحارة.' },
+        { id: 4, name: 'شيبسي بالملح والخل', category: 'الشيبسي والمقرمشات', price: 15, emoji: '🍟', barcode: '622100000004', reference: 'REF-CHIP-004', description: 'طعم الملح والخل الأصلي والمقرمش.' },
+        { id: 5, name: 'دوريتوس بالجبنة الناتشو', category: 'الشيبسي والمقرمشات', price: 18, emoji: '📐', barcode: '622100000005', reference: 'REF-CHIP-005', description: 'رقائق الذرة المقرمشة بنكهة جبنة الناتشو الغنية.' },
+        { id: 6, name: 'بيكس بالجبنة', category: 'الشيبسي والمقرمشات', price: 12, emoji: '🧀', barcode: '622100000006', reference: 'REF-CHIP-006', description: 'سناك مقرمش هشة بطعم الجبنة.' },
+
+        // قسم المشروبات والمياه
+        { id: 7, name: 'بيبسي كولا 330 مل', category: 'المشروبات والمياه', price: 15, emoji: '🥤', barcode: '622100000007', reference: 'REF-DRINK-001', description: 'مشروب بيبسي غازي منعش في عبوة كانز.' },
+        { id: 8, name: 'بيبسي كولا 1.5 لتر', category: 'المشروبات والمياه', price: 30, emoji: '🍾', barcode: '622100000008', reference: 'REF-DRINK-002', description: 'زجاجة بيبسي عائلية لجميع المناسبات.' },
+        { id: 9, name: 'سفن أب 330 مل', category: 'المشروبات والمياه', price: 15, emoji: '🥤', barcode: '622100000009', reference: 'REF-DRINK-003', description: 'مشروب غازي منعش بنكهة الليمون.' },
+        { id: 10, name: 'ميرندا برتقال 330 مل', category: 'المشروبات والمياه', price: 15, emoji: '🍊', barcode: '622100000010', reference: 'REF-DRINK-004', description: 'مشروب غازي بنكهة البرتقال الغنية.' },
+        { id: 11, name: 'عصير جهينة مانجو 1 لتر', category: 'المشروبات والمياه', price: 35, emoji: '🧃', barcode: '622100000011', reference: 'REF-DRINK-005', description: 'عصير مانجو طبيعي ولذيذ للأسرة.' },
+        { id: 12, name: 'مياه معدنية 1.5 لتر', category: 'المشروبات والمياه', price: 8, emoji: '💧', barcode: '622100000012', reference: 'REF-DRINK-006', description: 'مياه نقية ومنعشة عبوة كبيرة.' },
+
+        // قسم البقالة والسلع التموينية
+        { id: 13, name: 'أرز مصري فاخر 1 كجم', category: 'البقالة والسلع التموينية', price: 35, emoji: '🍚', barcode: '622100000013', reference: 'REF-GROC-001', description: 'أرز مصري درجة أولى عالي الجودة.' },
+        { id: 14, name: 'زيت عباد الشمس 800 مل', category: 'البقالة والسلع التموينية', price: 65, emoji: '🧴', barcode: '622100000014', reference: 'REF-GROC-002', description: 'زيت نقي خفيف للطهي والقلي.' },
+        { id: 15, name: 'مكرونة حواء 400 جرام', category: 'البقالة والسلع التموينية', price: 14, emoji: '🍝', barcode: '622100000015', reference: 'REF-GROC-003', description: 'مكرونة مصنوعة من أفضل أنواع القمح.' },
+        { id: 16, name: 'سكر أبيض 1 كجم', category: 'البقالة والسلع التموينية', price: 32, emoji: '🍬', barcode: '622100000016', reference: 'REF-GROC-004', description: 'سكر أبيض فاخر للحلويات والمشروبات.' },
+        { id: 17, name: 'شاي العروسة 250 جرام', category: 'البقالة والسلع التموينية', price: 55, emoji: '☕', barcode: '622100000017', reference: 'REF-GROC-005', description: 'شاي أسود ناعم طعم وجودة ممتازة.' },
+        { id: 18, name: 'صلصة طماطم 300 جرام', category: 'البقالة والسلع التموينية', price: 18, emoji: '🥫', barcode: '622100000018', reference: 'REF-GROC-006', description: 'معجون طماطم مركز للطبخ.' },
+
+        // قسم العناية المنزلية
+        { id: 19, name: 'مسحوق غسيل أوتوماتيك', category: 'العناية المنزلية', price: 120, emoji: '🧼', barcode: '622100000019', reference: 'REF-HOME-001', description: 'منظف قوي لإزالة البقع الصعبة والرائحة الانتعاش.' },
+        { id: 20, name: 'صابون أطباق سائل 1 لتر', category: 'العناية المنزلية', price: 28, emoji: '🧽', barcode: '622100000020', reference: 'REF-HOME-002', description: 'سائل غسيل الأواني بقوة الليمون والقضاء على الدهون.' },
+        { id: 21, name: 'مناديل ورقية 3 عبوات', category: 'العناية المنزلية', price: 25, emoji: '🧻', barcode: '622100000021', reference: 'REF-HOME-003', description: 'مناديل ورقية ناعمة وقوية للاستخدام اليومي.' }
       ];
 
       const WEBHOOK_URL = 'PASTE_YOUR_MAKE_WEBHOOK_URL_HERE';
@@ -898,7 +914,7 @@
       let selectedCategory = 'الكل';
 
       function formatCurrency(value) {
-        return `${Number(value).toFixed(2)} ر.س`;
+        return `${Number(value).toFixed(2)} ج.م`;
       }
 
       function getFilteredProducts() {
@@ -994,8 +1010,8 @@
 
         if (!cart.length) {
           cartItems.innerHTML = '<p style="color:#6b7280; margin:0;">العربة فاضية دلوقتي.</p>';
-          document.getElementById('subtotalValue').textContent = '0.00 ر.س';
-          document.getElementById('totalValue').textContent = '0.00 ر.س';
+          document.getElementById('subtotalValue').textContent = '0.00 ج.م';
+          document.getElementById('totalValue').textContent = '0.00 ج.م';
           return;
         }
 
@@ -1115,6 +1131,7 @@
           },
           items: orderItems,
           total,
+          currency: 'EGP',
           created_at: new Date().toISOString()
         };
 
