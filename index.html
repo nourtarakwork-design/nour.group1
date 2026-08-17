@@ -126,6 +126,11 @@
         font-weight: 800;
         cursor: pointer;
         box-shadow: 0 14px 28px rgba(245, 158, 11, 0.28);
+        transition: transform 0.2s ease;
+      }
+
+      .cart-pill:hover {
+        transform: scale(1.03);
       }
 
       .hero {
@@ -328,7 +333,7 @@
 
       .inventory-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
         gap: 20px;
       }
 
@@ -339,6 +344,8 @@
         overflow: hidden;
         box-shadow: var(--shadow);
         transition: transform 0.2s ease, box-shadow 0.2s ease;
+        display: flex;
+        flex-direction: column;
       }
 
       .product-card:hover {
@@ -347,7 +354,7 @@
       }
 
       .product-image {
-        height: 190px;
+        height: 180px;
         background: linear-gradient(135deg, #fef3c7, #dbeafe, #e2e8f0);
         display: grid;
         place-items: center;
@@ -369,6 +376,9 @@
 
       .product-content {
         padding: 18px;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
       }
 
       .product-meta {
@@ -401,40 +411,94 @@
 
       .product-desc {
         color: var(--muted);
-        line-height: 1.7;
+        line-height: 1.6;
         font-size: 0.88rem;
-        min-height: 56px;
+        min-height: 50px;
       }
 
       .product-info {
         display: grid;
         gap: 5px;
-        margin: 12px 0 0;
+        margin: 10px 0 16px;
         font-size: 0.78rem;
         color: #374151;
       }
 
       .product-footer {
         display: flex;
-        align-items: center;
-        justify-content: space-between;
+        flex-direction: column;
         gap: 12px;
-        margin-top: 16px;
+        margin-top: auto;
+        padding-top: 12px;
+        border-top: 1px dashed var(--border);
+      }
+
+      .product-price-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
       }
 
       .price {
         font-weight: 900;
-        font-size: 1.38rem;
+        font-size: 1.35rem;
+      }
+
+      .card-actions {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .card-qty-selector {
+        display: flex;
+        align-items: center;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        background: #f8fafc;
+        overflow: hidden;
+      }
+
+      .card-qty-btn {
+        width: 30px;
+        height: 36px;
+        border: none;
+        background: white;
+        font-weight: 800;
+        cursor: pointer;
+        color: var(--secondary);
+        transition: background 0.2s ease;
+      }
+
+      .card-qty-btn:hover {
+        background: #e2e8f0;
+      }
+
+      .card-qty-input {
+        width: 32px;
+        height: 36px;
+        border: none;
+        background: transparent;
+        text-align: center;
+        font-weight: 800;
+        font-size: 0.9rem;
+        color: var(--secondary);
       }
 
       .add-btn {
+        flex: 1;
         background: linear-gradient(135deg, var(--primary), var(--primary-dark));
         color: white;
         border: none;
-        border-radius: 12px;
-        padding: 11px 14px;
+        border-radius: 10px;
+        padding: 10px 12px;
         font-weight: 800;
         cursor: pointer;
+        transition: background 0.2s ease;
+      }
+
+      .add-btn:hover {
+        opacity: 0.95;
       }
 
       .features {
@@ -489,7 +553,7 @@
         position: absolute;
         top: 0;
         left: 0;
-        width: min(420px, 100%);
+        width: min(440px, 100%);
         height: 100%;
         background: white;
         box-shadow: 0 18px 48px rgba(15, 23, 42, 0.25);
@@ -659,6 +723,31 @@
         border: 1px solid rgba(220, 38, 38, 0.2);
       }
 
+      /* Toast Notification */
+      .toast-notification {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        background: #0f172a;
+        color: #ffffff;
+        padding: 14px 22px;
+        border-radius: 14px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+        z-index: 200;
+        transform: translateY(100px);
+        opacity: 0;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+        pointer-events: none;
+        border-right: 4px solid var(--primary);
+        font-weight: 700;
+        font-size: 0.95rem;
+      }
+
+      .toast-notification.show {
+        transform: translateY(0);
+        opacity: 1;
+      }
+
       @media (max-width: 900px) {
         .hero-inner { grid-template-columns: 1fr; }
         .features { grid-template-columns: repeat(2, minmax(180px, 1fr)); }
@@ -702,7 +791,7 @@
           <a href="#products">المنتجات</a>
           <a href="#categories">التصنيفات</a>
           <a href="#features">المزايا</a>
-          <button class="cart-pill" id="openCartBtn">العربة <span id="cartCount">0</span></button>
+          <button class="cart-pill" id="openCartBtn">العربة (<span id="cartCount">0</span>)</button>
         </nav>
       </div>
     </header>
@@ -877,6 +966,8 @@
       </div>
     </aside>
 
+    <div id="toastNotification" class="toast-notification"></div>
+
     <script>
       const products = [
         // قسم الشيبسي والمقرمشات
@@ -915,6 +1006,17 @@
 
       function formatCurrency(value) {
         return `${Number(value).toFixed(2)} ج.م`;
+      }
+
+      function showToast(message) {
+        const toast = document.getElementById('toastNotification');
+        if (!toast) return;
+        toast.textContent = message;
+        toast.classList.add('show');
+        clearTimeout(window.toastTimeout);
+        window.toastTimeout = setTimeout(() => {
+          toast.classList.remove('show');
+        }, 2200);
       }
 
       function getFilteredProducts() {
@@ -957,13 +1059,40 @@
               </div>
 
               <div class="product-footer">
-                <span class="price">${formatCurrency(product.price)}</span>
-                <button class="add-btn" data-product-id="${product.id}">أضف للعربة</button>
+                <div class="product-price-row">
+                  <span class="price">${formatCurrency(product.price)}</span>
+                </div>
+                <div class="card-actions">
+                  <div class="card-qty-selector">
+                    <button class="card-qty-btn minus" data-id="${product.id}">−</button>
+                    <input type="number" class="card-qty-input" id="qty-input-${product.id}" value="1" min="1" max="99" readonly />
+                    <button class="card-qty-btn plus" data-id="${product.id}">+</button>
+                  </div>
+                  <button class="add-btn" data-product-id="${product.id}">أضف للعربة 🛒</button>
+                </div>
               </div>
             </div>
           </article>
         `).join('');
 
+        // إضافة أحداث تغيير الكمية من داخل الكارت نفسه
+        document.querySelectorAll('.card-qty-btn').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const id = btn.dataset.id;
+            const input = document.getElementById(`qty-input-${id}`);
+            if (!input) return;
+            let val = parseInt(input.value) || 1;
+            if (btn.classList.contains('plus')) {
+              val += 1;
+            } else if (btn.classList.contains('minus') && val > 1) {
+              val -= 1;
+            }
+            input.value = val;
+          });
+        });
+
+        // إضافة حدث الإضافة للسلة
         document.querySelectorAll('.add-btn').forEach(button => {
           button.addEventListener('click', () => addToCart(Number(button.dataset.productId)));
         });
@@ -973,15 +1102,21 @@
         const product = products.find(item => item.id === productId);
         if (!product) return;
 
+        const qtyInput = document.getElementById(`qty-input-${productId}`);
+        const qtyToAdd = qtyInput ? parseInt(qtyInput.value) || 1 : 1;
+
         const existingItem = cart.find(item => item.id === productId);
         if (existingItem) {
-          existingItem.quantity += 1;
+          existingItem.quantity += qtyToAdd;
         } else {
-          cart.push({ ...product, quantity: 1 });
+          cart.push({ ...product, quantity: qtyToAdd });
         }
 
+        // إرجاع العداد داخل كارت المنتج إلى 1
+        if (qtyInput) qtyInput.value = 1;
+
         renderCart();
-        openCart();
+        showToast(`تمت إضافة (${qtyToAdd}) × ${product.name} إلى السلة!`);
       }
 
       function changeQuantity(productId, delta) {
@@ -1009,7 +1144,7 @@
         document.getElementById('cartCount').textContent = count;
 
         if (!cart.length) {
-          cartItems.innerHTML = '<p style="color:#6b7280; margin:0;">العربة فاضية دلوقتي.</p>';
+          cartItems.innerHTML = '<p style="color:#6b7280; margin:0; text-align:center; padding: 20px 0;">العربة فاضية دلوقتي.</p>';
           document.getElementById('subtotalValue').textContent = '0.00 ج.م';
           document.getElementById('totalValue').textContent = '0.00 ج.م';
           return;
@@ -1070,7 +1205,7 @@
       document.getElementById('goToCheckoutBtn').addEventListener('click', () => {
         if (!cart.length) {
           openCart();
-          showStatus('العربة فاضية، أضف منتج أول.', 'error');
+          showStatus('العربة فاضية، أضف منتج أولاً.', 'error');
           return;
         }
         openCart();
@@ -1095,7 +1230,7 @@
         event.preventDefault();
 
         if (!cart.length) {
-          showStatus('عايز تضيف منتج واحد على الأقل في العربة.', 'error');
+          showStatus('من فضلك أضف منتج واحد على الأقل في العربة.', 'error');
           return;
         }
 
