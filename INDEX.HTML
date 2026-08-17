@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>سوق المحلة | متجر بقالة احترافي</title>
+    <style>
+      :root {
+        --primary: #f59e0b;
+        --primary-dark: #d97706;
+        --secondary: #111827;
+        --bg: #f4f6fb;
+        --card: #ffffff;
+        --muted: #64748b;
+        --success: #16a34a;
+        --danger: #dc2626;
+        --soft: #fff7ed;
+        --border: #e5e7eb;
+        --shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+        --dark: #0f172a;
+      }
+
+      * { box-sizing: border-box; }
+
+      html { scroll-behavior: smooth; }
+
+      body {
+        margin: 0;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background:
+          radial-gradient(circle at top, rgba(245, 158, 11, 0.08), transparent 25%),
+          linear-gradient(180deg, #f8fafc 0%, #eef2f7 100%);
+        color: var(--secondary);
+      }
+
+      a { text-decoration: none; color: inherit; }
+      img { max-width: 100%; display: block; }
+      button, input, textarea { font: inherit; }
+
+      .container {
+        width: min(1200px, calc(100% - 28px));
+        margin: 0 auto;
+      }
+
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 30;
+        background: rgba(15, 23, 42, 0.92);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+        color: #fff;
+      }
+
+      .topbar-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 12px 0;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 800;
+        font-size: 1.35rem;
+      }
+
+      .brand-logo {
+        height: 42px;
+        width: auto;
+        max-height: 42px;
+        object-fit: contain;
+        border-radius: 8px;
+        filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.3));
+      }
+
+      .top-nav {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        color: rgba(255,255,255,0.82);
+      }
+
+      .top-nav a {
+        font-size: 0.95rem;
+        transition: color 0.2s ease;
+      }
+
+      .top-nav a:hover { color: #fff; }
+
+      .search-box {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(255,255,255,0.08);
+        border: 1px solid rgba(255,255,255,0.16);
+        border-radius: 999px;
+        max-width: 280px;
+        width: 100%;
+        padding: 0 12px;
+      }
+
+      .search-box input {
+        flex: 1;
+        background: transparent;
+        border: none;
+        color: white;
+        height: 40px;
+        outline: none;
+      }
+
+      .search-box input::placeholder { color: rgba(255,255,255,0.7); }
+
+      .cart-pill {
+        background: var(--primary);
+        color: #111827;
+        border: none;
+        border-radius: 999px;
+        padding: 10px 18px;
+        font-weight: 800;
+        cursor: pointer;
+        box-shadow: 0 14px 28px rgba(245, 158, 11, 0.28);
+      }
+
+      .hero {
+        padding: 48px 0 16px;
+      }
+
+      .hero-inner {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 28px;
+        align-items: center;
+      }
+
+      .hero-copy {
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.7), rgba(255,255,255,0.4));
+        border: 1px solid rgba(255,255,255,0.5);
+        border-radius: 26px;
+        padding: 28px;
+        box-shadow: var(--shadow);
+      }
+
+      .subtitle {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(245, 158, 11, 0.12);
+        color: #b45309;
+        border: 1px solid rgba(245, 158, 11, 0.2);
+        border-radius: 999px;
+        padding: 8px 12px;
+        font-weight: 700;
+        font-size: 0.8rem;
+        margin-bottom: 18px;
+      }
+
+      .hero h1 {
+        margin: 0 0 18px;
+        font-size: clamp(2.1rem, 4vw, 3.6rem);
+        line-height: 1.12;
+        color: var(--dark);
+      }
+
+      .hero p {
+        margin: 0 0 26px;
+        color: var(--muted);
+        font-size: 1.05rem;
+        line-height: 1.9;
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        margin-bottom: 18px;
+      }
+
+      .btn {
+        border: none;
+        border-radius: 12px;
+        padding: 14px 18px;
+        font-weight: 800;
+        cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .btn:hover { transform: translateY(-1px); }
+
+      .btn-primary {
+        background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+        color: white;
+        box-shadow: 0 14px 24px rgba(245, 158, 11, 0.28);
+      }
+
+      .btn-secondary {
+        background: white;
+        color: var(--secondary);
+        border: 1px solid var(--border);
+      }
+
+      .mini-stats {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .mini-stat {
+        flex: 1;
+        min-width: 120px;
+        background: rgba(255,255,255,0.62);
+        border: 1px solid rgba(148,163,184,0.2);
+        border-radius: 14px;
+        padding: 12px 14px;
+      }
+
+      .mini-stat strong {
+        display: block;
+        font-size: 1.1rem;
+        margin-bottom: 5px;
+      }
+
+      .mini-stat span {
+        font-size: 0.72rem;
+        color: var(--muted);
+      }
+
+      .hero-card {
+        background: linear-gradient(135deg, #111827, #1f2937);
+        color: white;
+        border-radius: 28px;
+        padding: 22px;
+        min-height: 330px;
+        box-shadow: var(--shadow);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .hero-card-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .promo-tag {
+        background: rgba(245, 158, 11, 0.18);
+        color: #fbbf24;
+        border: 1px solid rgba(251, 191, 36, 0.3);
+        border-radius: 999px;
+        padding: 8px 12px;
+        font-size: 0.8rem;
+        font-weight: 700;
+      }
+
+      .hero-card h3 {
+        margin: 8px 0 14px;
+        font-size: 2.2rem;
+      }
+
+      .hero-card p {
+        margin: 0;
+        color: rgba(255,255,255,0.76);
+        line-height: 1.7;
+      }
+
+      .product-highlight {
+        display: grid;
+        gap: 12px;
+        margin-top: 22px;
+      }
+
+      .highlight-item {
+        background: rgba(255,255,255,0.06);
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 14px;
+        padding: 12px 14px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .section {
+        padding: 28px 0;
+      }
+
+      .section-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        gap: 16px;
+      }
+
+      .section-head h2 {
+        margin: 0;
+        font-size: clamp(1.5rem, 2vw, 2rem);
+      }
+
+      .chip-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .chip {
+        background: white;
+        color: var(--secondary);
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        padding: 10px 16px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: 0.2s ease;
+      }
+
+      .chip.active {
+        background: var(--primary);
+        color: #111827;
+        border-color: var(--primary);
+      }
+
+      .inventory-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+        gap: 20px;
+      }
+
+      .product-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 22px;
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .product-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 18px 34px rgba(15, 23, 42, 0.14);
+      }
+
+      .product-image {
+        height: 190px;
+        background: linear-gradient(135deg, #fef3c7, #dbeafe, #e2e8f0);
+        display: grid;
+        place-items: center;
+        font-size: 3.4rem;
+        position: relative;
+      }
+
+      .image-badge {
+        position: absolute;
+        right: 12px;
+        top: 12px;
+        background: rgba(15, 23, 42, 0.75);
+        color: white;
+        border-radius: 999px;
+        padding: 7px 10px;
+        font-size: 0.7rem;
+        font-weight: 700;
+      }
+
+      .product-content {
+        padding: 18px;
+      }
+
+      .product-meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .product-tag {
+        display: inline-flex;
+        background: #eef2ff;
+        color: #4338ca;
+        border-radius: 999px;
+        padding: 6px 10px;
+        font-size: 0.71rem;
+        font-weight: 800;
+      }
+
+      .rating {
+        color: #f59e0b;
+        font-size: 0.85rem;
+      }
+
+      .product-title {
+        font-weight: 800;
+        font-size: 1.14rem;
+        margin: 12px 0 8px;
+      }
+
+      .product-desc {
+        color: var(--muted);
+        line-height: 1.7;
+        font-size: 0.88rem;
+        min-height: 56px;
+      }
+
+      .product-info {
+        display: grid;
+        gap: 5px;
+        margin: 12px 0 0;
+        font-size: 0.78rem;
+        color: #374151;
+      }
+
+      .product-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-top: 16px;
+      }
+
+      .price {
+        font-weight: 900;
+        font-size: 1.38rem;
+      }
+
+      .add-btn {
+        background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+        color: white;
+        border: none;
+        border-radius: 12px;
+        padding: 11px 14px;
+        font-weight: 800;
+        cursor: pointer;
+      }
+
+      .features {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(180px, 1fr));
+        gap: 18px;
+      }
+
+      .feature-item {
+        background: white;
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        padding: 18px;
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        box-shadow: 0 10px 20px rgba(15,23,42,0.04);
+      }
+
+      .feature-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 14px;
+        display: grid;
+        place-items: center;
+        background: #fff7ed;
+        color: var(--primary-dark);
+        font-size: 1.2rem;
+      }
+
+      .feature-item strong {
+        display: block;
+        margin-bottom: 4px;
+      }
+
+      .feature-item span {
+        color: var(--muted);
+        font-size: 0.75rem;
+      }
+
+      .cart-shell {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(15, 23, 42, 0.55);
+        z-index: 100;
+      }
+
+      .cart-shell.open { display: block; }
+
+      .cart-panel {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: min(420px, 100%);
+        height: 100%;
+        background: white;
+        box-shadow: 0 18px 48px rgba(15, 23, 42, 0.25);
+        padding: 22px;
+        display: flex;
+        flex-direction: column;
+        animation: slideIn 0.25s ease;
+      }
+
+      @keyframes slideIn {
+        from { transform: translateX(-30px); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
+      }
+
+      .cart-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16px;
+      }
+
+      .cart-header h3 {
+        margin: 0;
+        font-size: 1.5rem;
+      }
+
+      .close-btn {
+        border: none;
+        background: #f3f4f6;
+        border-radius: 10px;
+        width: 38px;
+        height: 38px;
+        cursor: pointer;
+        font-size: 1.15rem;
+      }
+
+      .cart-items {
+        flex: 1;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        margin-bottom: 16px;
+      }
+
+      .cart-item {
+        display: flex;
+        gap: 12px;
+        padding: 12px;
+        border-radius: 16px;
+        background: #f8fafc;
+        border: 1px solid var(--border);
+      }
+
+      .cart-item-thumb {
+        width: 65px;
+        height: 65px;
+        border-radius: 14px;
+        background: linear-gradient(135deg, #fef3c7, #dbeafe);
+        display: grid;
+        place-items: center;
+        font-size: 1.7rem;
+      }
+
+      .cart-item-body {
+        flex: 1;
+      }
+
+      .cart-item-header {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+      }
+
+      .cart-item-title {
+        font-weight: 800;
+      }
+
+      .qty-wrap {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 8px;
+      }
+
+      .qty-btn {
+        width: 28px;
+        height: 28px;
+        border-radius: 8px;
+        border: 1px solid var(--border);
+        background: white;
+        cursor: pointer;
+      }
+
+      .remove-link {
+        background: transparent;
+        border: none;
+        color: var(--danger);
+        cursor: pointer;
+        font-weight: 800;
+      }
+
+      .cart-summary {
+        background: #f8fafc;
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 16px;
+      }
+
+      .summary-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 0;
+      }
+
+      .summary-row.total {
+        font-weight: 900;
+        font-size: 1.15rem;
+      }
+
+      .checkout-form {
+        display: grid;
+        gap: 14px;
+        margin-top: 14px;
+      }
+
+      .field {
+        display: grid;
+        gap: 8px;
+      }
+
+      .field label {
+        font-size: 0.9rem;
+        font-weight: 700;
+      }
+
+      .field input,
+      .field textarea {
+        width: 100%;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 12px 14px;
+        background: white;
+        resize: vertical;
+      }
+
+      .status {
+        display: none;
+        margin-top: 12px;
+        padding: 12px 14px;
+        border-radius: 12px;
+        font-weight: 700;
+      }
+
+      .status.success {
+        display: block;
+        background: rgba(22, 163, 74, 0.1);
+        color: var(--success);
+        border: 1px solid rgba(22, 163, 74, 0.2);
+      }
+
+      .status.error {
+        display: block;
+        background: rgba(220, 38, 38, 0.08);
+        color: var(--danger);
+        border: 1px solid rgba(220, 38, 38, 0.2);
+      }
+
+      @media (max-width: 900px) {
+        .hero-inner { grid-template-columns: 1fr; }
+        .features { grid-template-columns: repeat(2, minmax(180px, 1fr)); }
+      }
+
+      @media (max-width: 640px) {
+        .topbar-inner,
+        .section-head {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .top-nav {
+          width: 100%;
+          justify-content: space-between;
+        }
+
+        .search-box {
+          width: 100%;
+          max-width: 100%;
+        }
+
+        .features { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="container topbar-inner">
+        <div class="brand">
+          <!-- تم إضافة الصورة هنا بجانب اسم الموقع -->
+          <img src="logo.jpg" alt="شعار سوق المحلة" class="brand-logo" />
+          <span>سوق المحلة</span>
+        </div>
+
+        <div class="search-box">
+          <span>🔎</span>
+          <input id="searchInput" type="text" placeholder="ابحث عن منتج..." />
+        </div>
+
+        <nav class="top-nav">
+          <a href="#products">المنتجات</a>
+          <a href="#categories">التصنيفات</a>
+          <a href="#features">المزايا</a>
+          <button class="cart-pill" id="openCartBtn">العربة <span id="cartCount">0</span></button>
+        </nav>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="container hero-inner">
+        <div class="hero-copy">
+          <span class="subtitle">⚡ توصيل سريع وطلب سهل</span>
+          <h1>السوق اللي تشتري منه كل يوم</h1>
+          <p>
+            اكتشف أفضل منتجات الشيبسي، بيبسي والمشروبات، والسلع التموينية والبقالة بمواصفات ممتازة
+            وأسعار مناسبة مع تجربة طلب سريعة ومريحة جدًا.
+          </p>
+
+          <div class="hero-actions">
+            <button class="btn btn-primary" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">تسوق الآن</button>
+            <button class="btn btn-secondary" id="goToCheckoutBtn">إتمام الطلب</button>
+          </div>
+
+          <div class="mini-stats">
+            <div class="mini-stat">
+              <strong>+2.4k</strong>
+              <span>عميل راضي</span>
+            </div>
+            <div class="mini-stat">
+              <strong>30%</strong>
+              <span>خصم خاص</span>
+            </div>
+            <div class="mini-stat">
+              <strong>24/7</strong>
+              <span>خدمة العملاء</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <div class="hero-card-top">
+            <span class="promo-tag">عرض اليوم</span>
+            <span style="font-size: 1.2rem;">🔥</span>
+          </div>
+
+          <div>
+            <h3>عروض البقالة والشيبسي</h3>
+            <p>أطلب شيبسي، بيبسي، ومنتجات البقالة والمنظفات بأعلى جودة وأفضل سعر.</p>
+          </div>
+
+          <div class="product-highlight">
+            <div class="highlight-item">
+              <span>شيبسي بالجبنة المتبلة</span>
+              <strong>15 ج.م</strong>
+            </div>
+            <div class="highlight-item">
+              <span>بيبسي كولا 1.5 لتر</span>
+              <strong>30 ج.م</strong>
+            </div>
+            <div class="highlight-item">
+              <span>أرز مصري فاخر 1 كجم</span>
+              <strong>35 ج.م</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <main class="container">
+      <section class="section" id="categories">
+        <div class="section-head">
+          <h2>التصنيفات</h2>
+        </div>
+        <div class="chip-row" id="categoryChips">
+          <button class="chip active" data-category="الكل">الكل</button>
+          <button class="chip" data-category="الشيبسي والمقرمشات">الشيبسي والمقرمشات</button>
+          <button class="chip" data-category="المشروبات والمياه">المشروبات والمياه</button>
+          <button class="chip" data-category="البقالة والسلع التموينية">البقالة والسلع التموينية</button>
+          <button class="chip" data-category="العناية المنزلية">العناية المنزلية</button>
+        </div>
+      </section>
+
+      <section class="section" id="products">
+        <div class="section-head">
+          <h2>أحدث المنتجات</h2>
+        </div>
+        <div class="inventory-grid" id="productGrid"></div>
+      </section>
+
+      <section class="section" id="features">
+        <div class="features">
+          <div class="feature-item">
+            <div class="feature-icon">🚚</div>
+            <div>
+              <strong>توصيل سريع</strong>
+              <span>خلال 24-48 ساعة</span>
+            </div>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-icon">💳</div>
+            <div>
+              <strong>دفع آمن</strong>
+              <span>تجربة شراء مريحة</span>
+            </div>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-icon">🛡️</div>
+            <div>
+              <strong>ضمان الجودة</strong>
+              <span>منتجات موثوقة</span>
+            </div>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-icon">📞</div>
+            <div>
+              <strong>خدمة العملاء</strong>
+              <span>متاحة 24/7</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <aside class="cart-shell" id="cartShell">
+      <div class="cart-panel">
+        <div class="cart-header">
+          <h3>عربة التسوق</h3>
+          <button class="close-btn" id="closeCartBtn" aria-label="إغلاق السلة">✕</button>
+        </div>
+
+        <div class="cart-items" id="cartItems"></div>
+
+        <div class="cart-summary">
+          <div class="summary-row">
+            <span>المجموع الفرعي</span>
+            <strong id="subtotalValue">0.00 ج.م</strong>
+          </div>
+          <div class="summary-row">
+            <span>التوصيل</span>
+            <strong>0.00 ج.م</strong>
+          </div>
+          <div class="summary-row total">
+            <span>الإجمالي</span>
+            <strong id="totalValue">0.00 ج.م</strong>
+          </div>
+        </div>
+
+        <form id="checkoutForm" class="checkout-form" autocomplete="on">
+          <div class="field">
+            <label for="customerName">اسم العميل</label>
+            <input id="customerName" name="customerName" type="text" placeholder="اكتب اسمك بالكامل" required />
+          </div>
+
+          <div class="field">
+            <label for="customerPhone">رقم الهاتف</label>
+            <input id="customerPhone" name="customerPhone" type="tel" placeholder="01XXXXXXXXX" required />
+          </div>
+
+          <div class="field">
+            <label for="customerAddress">العنوان التفصيلي</label>
+            <textarea id="customerAddress" name="customerAddress" rows="3" placeholder="اسم المدينة، الحي، الشارع، تفاصيل إضافية" required></textarea>
+          </div>
+
+          <div class="field">
+            <label for="customerNotes">ملاحظات إضافية</label>
+            <textarea id="customerNotes" name="customerNotes" rows="2" placeholder="مثلاً وقت التوصيل أو تعليمات خاصة"></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width:100%;">تأكيد الطلب</button>
+        </form>
+
+        <div class="status" id="statusMessage"></div>
+      </div>
+    </aside>
+
+    <script>
+      const products = [
+        // قسم الشيبسي والمقرمشات
+        { id: 1, name: 'شيبسي بالجبنة المتبلة', category: 'الشيبسي والمقرمشات', price: 15, emoji: '🥨', barcode: '622100000001', reference: 'REF-CHIP-001', description: 'بطاطس شيبسي مقرمشة بنكهة الجبنة المتبلة اللذيذة.' },
+        { id: 2, name: 'شيبسي بالطماطم', category: 'الشيبسي والمقرمشات', price: 15, emoji: '🍟', barcode: '622100000002', reference: 'REF-CHIP-002', description: 'بطاطس مقرمشة بنكهة الطماطم المبتكرة.' },
+        { id: 3, name: 'شيبسي بالفلفل والليمون', category: 'الشيبسي والمقرمشات', price: 15, emoji: '🥔', barcode: '622100000003', reference: 'REF-CHIP-003', description: 'نكهة الفلفل والليمون المنعشة والحارة.' },
+        { id: 4, name: 'شيبسي بالملح والخل', category: 'الشيبسي والمقرمشات', price: 15, emoji: '🍟', barcode: '622100000004', reference: 'REF-CHIP-004', description: 'طعم الملح والخل الأصلي والمقرمش.' },
+        { id: 5, name: 'دوريتوس بالجبنة الناتشو', category: 'الشيبسي والمقرمشات', price: 18, emoji: '📐', barcode: '622100000005', reference: 'REF-CHIP-005', description: 'رقائق الذرة المقرمشة بنكهة جبنة الناتشو الغنية.' },
+        { id: 6, name: 'بيكس بالجبنة', category: 'الشيبسي والمقرمشات', price: 12, emoji: '🧀', barcode: '622100000006', reference: 'REF-CHIP-006', description: 'سناك مقرمش هشة بطعم الجبنة.' },
+
+        // قسم المشروبات والمياه
+        { id: 7, name: 'بيبسي كولا 330 مل', category: 'المشروبات والمياه', price: 15, emoji: '🥤', barcode: '622100000007', reference: 'REF-DRINK-001', description: 'مشروب بيبسي غازي منعش في عبوة كانز.' },
+        { id: 8, name: 'بيبسي كولا 1.5 لتر', category: 'المشروبات والمياه', price: 30, emoji: '🍾', barcode: '622100000008', reference: 'REF-DRINK-002', description: 'زجاجة بيبسي عائلية لجميع المناسبات.' },
+        { id: 9, name: 'سفن أب 330 مل', category: 'المشروبات والمياه', price: 15, emoji: '🥤', barcode: '622100000009', reference: 'REF-DRINK-003', description: 'مشروب غازي منعش بنكهة الليمون.' },
+        { id: 10, name: 'ميرندا برتقال 330 مل', category: 'المشروبات والمياه', price: 15, emoji: '🍊', barcode: '622100000010', reference: 'REF-DRINK-004', description: 'مشروب غازي بنكهة البرتقال الغنية.' },
+        { id: 11, name: 'عصير جهينة مانجو 1 لتر', category: 'المشروبات والمياه', price: 35, emoji: '🧃', barcode: '622100000011', reference: 'REF-DRINK-005', description: 'عصير مانجو طبيعي ولذيذ للأسرة.' },
+        { id: 12, name: 'مياه معدنية 1.5 لتر', category: 'المشروبات والمياه', price: 8, emoji: '💧', barcode: '622100000012', reference: 'REF-DRINK-006', description: 'مياه نقية ومنعشة عبوة كبيرة.' },
+
+        // قسم البقالة والسلع التموينية
+        { id: 13, name: 'أرز مصري فاخر 1 كجم', category: 'البقالة والسلع التموينية', price: 35, emoji: '🍚', barcode: '622100000013', reference: 'REF-GROC-001', description: 'أرز مصري درجة أولى عالي الجودة.' },
+        { id: 14, name: 'زيت عباد الشمس 800 مل', category: 'البقالة والسلع التموينية', price: 65, emoji: '🧴', barcode: '622100000014', reference: 'REF-GROC-002', description: 'زيت نقي خفيف للطهي والقلي.' },
+        { id: 15, name: 'مكرونة حواء 400 جرام', category: 'البقالة والسلع التموينية', price: 14, emoji: '🍝', barcode: '622100000015', reference: 'REF-GROC-003', description: 'مكرونة مصنوعة من أفضل أنواع القمح.' },
+        { id: 16, name: 'سكر أبيض 1 كجم', category: 'البقالة والسلع التموينية', price: 32, emoji: '🍬', barcode: '622100000016', reference: 'REF-GROC-004', description: 'سكر أبيض فاخر للحلويات والمشروبات.' },
+        { id: 17, name: 'شاي العروسة 250 جرام', category: 'البقالة والسلع التموينية', price: 55, emoji: '☕', barcode: '622100000017', reference: 'REF-GROC-005', description: 'شاي أسود ناعم طعم وجودة ممتازة.' },
+        { id: 18, name: 'صلصة طماطم 300 جرام', category: 'البقالة والسلع التموينية', price: 18, emoji: '🥫', barcode: '622100000018', reference: 'REF-GROC-006', description: 'معجون طماطم مركز للطبخ.' },
+
+        // قسم العناية المنزلية
+        { id: 19, name: 'مسحوق غسيل أوتوماتيك', category: 'العناية المنزلية', price: 120, emoji: '🧼', barcode: '622100000019', reference: 'REF-HOME-001', description: 'منظف قوي لإزالة البقع الصعبة والرائحة الانتعاش.' },
+        { id: 20, name: 'صابون أطباق سائل 1 لتر', category: 'العناية المنزلية', price: 28, emoji: '🧽', barcode: '622100000020', reference: 'REF-HOME-002', description: 'سائل غسيل الأواني بقوة الليمون والقضاء على الدهون.' },
+        { id: 21, name: 'مناديل ورقية 3 عبوات', category: 'العناية المنزلية', price: 25, emoji: '🧻', barcode: '622100000021', reference: 'REF-HOME-003', description: 'مناديل ورقية ناعمة وقوية للاستخدام اليومي.' }
+      ];
+
+      const WEBHOOK_URL = 'PASTE_YOUR_MAKE_WEBHOOK_URL_HERE';
+      const cart = [];
+      let selectedCategory = 'الكل';
+
+      function formatCurrency(value) {
+        return `${Number(value).toFixed(2)} ج.م`;
+      }
+
+      function getFilteredProducts() {
+        const searchTerm = document.getElementById('searchInput')?.value.trim().toLowerCase() || '';
+
+        return products.filter(product => {
+          const categoryMatch = selectedCategory === 'الكل' || product.category === selectedCategory;
+          const searchMatch = !searchTerm || product.name.toLowerCase().includes(searchTerm) || product.description.toLowerCase().includes(searchTerm);
+          return categoryMatch && searchMatch;
+        });
+      }
+
+      function renderProducts() {
+        const grid = document.getElementById('productGrid');
+        const filteredProducts = getFilteredProducts();
+
+        if (!filteredProducts.length) {
+          grid.innerHTML = '<div style="grid-column: 1 / -1; background: white; border: 1px solid var(--border); border-radius: 18px; padding: 24px; text-align: center; color: var(--muted);">لا توجد منتجات مطابقة لبحثك حاليًا.</div>';
+          return;
+        }
+
+        grid.innerHTML = filteredProducts.map(product => `
+          <article class="product-card">
+            <div class="product-image" aria-label="${product.name}">
+              <span>${product.emoji}</span>
+              <span class="image-badge">${product.category}</span>
+            </div>
+            <div class="product-content">
+              <div class="product-meta">
+                <span class="product-tag">${product.category}</span>
+                <span class="rating">★★★★★</span>
+              </div>
+
+              <h3 class="product-title">${product.name}</h3>
+              <p class="product-desc">${product.description}</p>
+
+              <div class="product-info">
+                <div><strong>الباركود:</strong> ${product.barcode}</div>
+                <div><strong>الرقم المرجعي:</strong> ${product.reference}</div>
+              </div>
+
+              <div class="product-footer">
+                <span class="price">${formatCurrency(product.price)}</span>
+                <button class="add-btn" data-product-id="${product.id}">أضف للعربة</button>
+              </div>
+            </div>
+          </article>
+        `).join('');
+
+        document.querySelectorAll('.add-btn').forEach(button => {
+          button.addEventListener('click', () => addToCart(Number(button.dataset.productId)));
+        });
+      }
+
+      function addToCart(productId) {
+        const product = products.find(item => item.id === productId);
+        if (!product) return;
+
+        const existingItem = cart.find(item => item.id === productId);
+        if (existingItem) {
+          existingItem.quantity += 1;
+        } else {
+          cart.push({ ...product, quantity: 1 });
+        }
+
+        renderCart();
+        openCart();
+      }
+
+      function changeQuantity(productId, delta) {
+        const item = cart.find(entry => entry.id === productId);
+        if (!item) return;
+
+        item.quantity += delta;
+        if (item.quantity <= 0) {
+          const index = cart.findIndex(entry => entry.id === productId);
+          cart.splice(index, 1);
+        }
+
+        renderCart();
+      }
+
+      function removeFromCart(productId) {
+        const index = cart.findIndex(item => item.id === productId);
+        if (index !== -1) cart.splice(index, 1);
+        renderCart();
+      }
+
+      function renderCart() {
+        const cartItems = document.getElementById('cartItems');
+        const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+        document.getElementById('cartCount').textContent = count;
+
+        if (!cart.length) {
+          cartItems.innerHTML = '<p style="color:#6b7280; margin:0;">العربة فاضية دلوقتي.</p>';
+          document.getElementById('subtotalValue').textContent = '0.00 ج.م';
+          document.getElementById('totalValue').textContent = '0.00 ج.م';
+          return;
+        }
+
+        const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
+        cartItems.innerHTML = cart.map(item => `
+          <div class="cart-item">
+            <div class="cart-item-thumb">${item.emoji}</div>
+            <div class="cart-item-body">
+              <div class="cart-item-header">
+                <div class="cart-item-title">${item.name}</div>
+                <strong>${formatCurrency(item.price * item.quantity)}</strong>
+              </div>
+              <div class="qty-wrap">
+                <button class="qty-btn" data-action="minus" data-id="${item.id}">−</button>
+                <span>${item.quantity}</span>
+                <button class="qty-btn" data-action="plus" data-id="${item.id}">+</button>
+                <button class="remove-link" data-id="${item.id}">حذف</button>
+              </div>
+            </div>
+          </div>
+        `).join('');
+
+        document.getElementById('subtotalValue').textContent = formatCurrency(subtotal);
+        document.getElementById('totalValue').textContent = formatCurrency(subtotal);
+
+        document.querySelectorAll('.qty-btn').forEach(button => {
+          button.addEventListener('click', () => {
+            const productId = Number(button.dataset.id);
+            const action = button.dataset.action;
+            changeQuantity(productId, action === 'plus' ? 1 : -1);
+          });
+        });
+
+        document.querySelectorAll('.remove-link').forEach(button => {
+          button.addEventListener('click', () => removeFromCart(Number(button.dataset.id)));
+        });
+      }
+
+      function openCart() {
+        document.getElementById('cartShell').classList.add('open');
+      }
+
+      function closeCart() {
+        document.getElementById('cartShell').classList.remove('open');
+      }
+
+      function showStatus(message, type) {
+        const status = document.getElementById('statusMessage');
+        status.textContent = message;
+        status.className = `status ${type}`;
+      }
+
+      document.getElementById('openCartBtn').addEventListener('click', openCart);
+      document.getElementById('closeCartBtn').addEventListener('click', closeCart);
+      document.getElementById('goToCheckoutBtn').addEventListener('click', () => {
+        if (!cart.length) {
+          openCart();
+          showStatus('العربة فاضية، أضف منتج أول.', 'error');
+          return;
+        }
+        openCart();
+      });
+
+      document.getElementById('cartShell').addEventListener('click', (event) => {
+        if (event.target === event.currentTarget) closeCart();
+      });
+
+      document.getElementById('searchInput').addEventListener('input', renderProducts);
+
+      document.getElementById('categoryChips').addEventListener('click', (event) => {
+        const chip = event.target.closest('.chip');
+        if (!chip) return;
+
+        selectedCategory = chip.dataset.category;
+        document.querySelectorAll('.chip').forEach(item => item.classList.toggle('active', item === chip));
+        renderProducts();
+      });
+
+      document.getElementById('checkoutForm').addEventListener('submit', async function (event) {
+        event.preventDefault();
+
+        if (!cart.length) {
+          showStatus('عايز تضيف منتج واحد على الأقل في العربة.', 'error');
+          return;
+        }
+
+        const customerName = document.getElementById('customerName').value.trim();
+        const customerPhone = document.getElementById('customerPhone').value.trim();
+        const customerAddress = document.getElementById('customerAddress').value.trim();
+        const customerNotes = document.getElementById('customerNotes').value.trim();
+
+        if (!customerName || !customerPhone || !customerAddress) {
+          showStatus('من فضلك املأ كل الحقول المطلوبة.', 'error');
+          return;
+        }
+
+        const orderItems = cart.map(item => ({
+          product_id: item.id,
+          product_name: item.name,
+          barcode: item.barcode,
+          reference: item.reference,
+          quantity: item.quantity,
+          price: item.price,
+          total: item.price * item.quantity
+        }));
+
+        const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
+        const payload = {
+          source: 'storefront',
+          customer: {
+            name: customerName,
+            phone: customerPhone,
+            address: customerAddress,
+            notes: customerNotes
+          },
+          items: orderItems,
+          total,
+          currency: 'EGP',
+          created_at: new Date().toISOString()
+        };
+
+        const submitButton = this.querySelector('button[type="submit"]');
+        submitButton.disabled = true;
+        submitButton.textContent = 'جارٍ إرسال الطلب...';
+
+        try {
+          if (!WEBHOOK_URL || WEBHOOK_URL.includes('PASTE_YOUR')) {
+            throw new Error('يجب استبدال رابط Webhook الفعلي في المتغير WEBHOOK_URL داخل الملف.');
+          }
+
+          const response = await fetch(WEBHOOK_URL, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+          });
+
+          if (!response.ok) {
+            throw new Error(`فشل إرسال الطلب، الحالة: ${response.status}`);
+          }
+
+          showStatus('تم تأكيد الطلب بنجاح وسيتم توجيهه إلى Make.com.', 'success');
+          cart.length = 0;
+          renderCart();
+          this.reset();
+
+          setTimeout(() => {
+            closeCart();
+            showStatus('', 'success');
+          }, 2000);
+        } catch (error) {
+          console.error('Webhook error:', error);
+          showStatus(error.message || 'فيه مشكلة في إرسال الطلب، حاول مرة تانية.', 'error');
+        } finally {
+          submitButton.disabled = false;
+          submitButton.textContent = 'تأكيد الطلب';
+        }
+      });
+
+      renderProducts();
+      renderCart();
+    </script>
+  </body>
+</html>
